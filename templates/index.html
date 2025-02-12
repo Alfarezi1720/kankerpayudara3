@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Breast Cancer Classification</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #fef6e4, #f7d9e1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+      }
+      h1 {
+        color: #fa05c5;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        text-align: left;
+        margin: 10px 0 5px;
+        color: #333;
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #fa05c5;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      input[type="submit"]:hover {
+        background-color: #fa05c5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="font-family: Arial, sans-serif">
+      <h1 style="text-align: center">Breast Cancer Classification</h1>
+      <form
+        action="/predict"
+        method="POST"
+        style="max-width: 600px; margin: 0 auto"
+      >
+        <label>Radius Mean (6.0 - 30.0):</label>
+        <input type="text" name="radius_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Average radius of the tumor (distance from the center to the
+          boundary).
+        </small>
+
+        <label>Texture Mean (10.0 - 40.0):</label>
+        <input type="text" name="texture_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Variability in grayscale intensity across the tumor image.
+        </small>
+
+        <label>Perimeter Mean (40.0 - 190.0):</label>
+        <input type="text" name="perimeter_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Average perimeter of the tumor boundary.
+        </small>
+
+        <label>Area Mean (150.0 - 2500.0):</label>
+        <input type="text" name="area_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Average area occupied by the tumor.
+        </small>
+
+        <label>Smoothness Mean (0.05 - 0.15):</label>
+        <input type="text" name="smoothness_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Measure of smoothness or irregularity of the tumor boundary.
+        </small>
+
+        <label>Compactness Mean (0.02 - 0.35):</label>
+        <input type="text" name="compactness_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Degree of compactness or density of the tumor.
+        </small>
+
+        <label>Concavity Mean (0.01 - 0.40):</label>
+        <input type="text" name="concavity_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Extent of concave (inward-curved) parts of the tumor boundary.
+        </small>
+
+        <label>Concave Points Mean (0.01 - 0.20):</label>
+        <input type="text" name="concave_points_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Number of concave points on the tumor boundary.
+        </small>
+
+        <label>Symmetry Mean (0.10 - 0.30):</label>
+        <input type="text" name="symmetry_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Symmetry of the tumor structure.
+        </small>
+
+        <label>Fractal Dimension Mean (0.05 - 0.10):</label>
+        <input type="text" name="fractal_dimension_mean" required />
+        <small style="color: #555; display: block; margin-bottom: 15px">
+          Measure of tumor boundary complexity.
+        </small>
+
+        <button
+          type="submit"
+          style="
+            background-color: #ff69b4; /* Warna pink */
+            color: white; /* Warna teks putih */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px; /* Membuat sudut sedikit melengkung */
+          "
+        >
+          Classify
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

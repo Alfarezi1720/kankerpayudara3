@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #fef6e4, #f7d9e1);
+        color: #333;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        color: #444;
+      }
+
+      .profile-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .card {
+        flex: 0 1 48%; /* Set card width to 48% for both cards */
+        margin: 10px;
+        padding: 20px;
+        background: #fefefe;
+        border-radius: 10px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .card img {
+        display: block;
+        width: 120px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin: 0 auto 10px auto;
+        border: 2px solid #f7d9e1;
+      }
+
+      .card h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        text-align: center;
+        color: #333;
+      }
+
+      .card ul {
+        list-style: none;
+        padding: 0;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .card ul li {
+        margin: 5px 0;
+      }
+
+      .card p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 10px 0 0;
+        color: #444;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+        color: #777;
+      }
+
+      .icon {
+        font-size: 24px;
+        margin-right: 10px;
+        color: #f7d9e1;
+      }
+      .back-button-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        margin-top: 20px;
+      }
+
+      .back-button {
+        background-color: #ff69b4; /* Warna pink */
+        color: white; /* Warna teks putih */
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px; /* Membuat sudut sedikit melengkung */
+        text-align: center;
+        text-decoration: none; /* Menghilangkan underline */
+      }
+
+      .back-button:hover {
+        background-color: #ff4da6; /* Warna hover sedikit lebih gelap */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>About Me</h1>
+      </div>
+      <div class="profile-container">
+        <!-- Personal Information -->
+        <div class="card">
+          <h2><span class="icon">👤</span> Personal Information</h2>
+          <img src="/static/46 aldi.jpg" alt="Profile Photo" />
+          <ul>
+            <li><strong>Name:</strong> Muhamad Aldi Fahrezi</li>
+            <li><strong>Program:</strong> Teknik Informatika</li>
+            <li><strong>Student ID:</strong> 46114200062</li>
+            <li><strong>Faculty:</strong> FMIPA</li>
+            <li><strong>University:</strong> Universitas Negeri Semarang</li>
+          </ul>
+        </div>
+
+        <!-- Project Information -->
+        <div class="card">
+          <h2><span class="icon">💻</span> Project Information</h2>
+          <p>
+            This project is designed to assist in breast cancer classification
+            using advanced machine learning algorithms. It helps classify tumors
+            into benign or malignant, supporting healthcare professionals in
+            diagnosis and treatment planning.
+          </p>
+          <p>
+            The website utilizes Naive Bayes with hyperparameter optimization to
+            ensure accurate and efficient predictions.
+          </p>
+        </div>
+      </div>
+
+      <div class="back-button-container">
+        <a href="/" class="back-button">Back to Home</a>
+      </div>
+    </div>
+
+    <footer>&copy; 2024 Muhamad Aldi Fahrezi. All Rights Reserved.</footer>
+  </body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Breast Cancer Classification App</title>
+    <style>
+      /* General Styles */
+      * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(
+          135deg,
+          #fef6e4,
+          #f7d9e1
+        ); /* Soft pastel background */
+        color: #333;
+      }
+      .navbar {
+        background-color: #fa05c5;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+      }
+      .navbar img {
+        height: 40px;
+        margin-right: 15px;
+      }
+      .navbar .nav-links {
+        display: flex;
+        align-items: center;
+      }
+      .navbar a {
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 18px;
+        transition: color 0.3s ease;
+      }
+      .navbar a:hover {
+        color: #ffd700;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 20px;
+        text-align: center;
+      }
+      h1 {
+        color: #fa05c5;
+        font-size: 32px;
+        font-weight: bold;
+      }
+      p {
+        font-size: 18px;
+        color: #555;
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+
+      /* Information Section */
+      .info-section {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+        margin-bottom: 40px;
+        gap: 20px;
+      }
+      .info-box {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        width: 45%;
+        transition: transform 0.3s ease;
+      }
+      .info-box:hover {
+        transform: translateY(-5px);
+      }
+      .info-box img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 15px;
+      }
+      .info-box h3 {
+        color: #fa05c5;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      .info-box p {
+        font-size: 16px;
+        color: #333;
+      }
+      .info-box ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      .info-box ul li {
+        font-size: 14px;
+        color: #555;
+        padding: 5px 0;
+        border-bottom: 1px dashed #ddd;
+      }
+
+      /* Classify Button */
+      .classify-button {
+        padding: 15px 30px;
+        background-color: #fa05c5;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 30px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+      .classify-button:hover {
+        background-color: #d104a3;
+        transform: scale(1.05);
+      }
+
+      /* Additional Information */
+      .additional-info {
+        margin-top: 40px;
+        font-size: 18px;
+        color: #666;
+        text-align: left;
+      }
+      .additional-info h2 {
+        color: #fa05c5;
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        width: 80%;
+        text-align: center;
+      }
+      .close {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <img src="{{ url_for('static', filename='pitapink.png') }}" alt="Logo" />
+      <div class="nav-links">
+        <a href="#" onclick="openModal('aboutModal')">About</a>
+        <a href="#" onclick="openModal('contactModal')">Contact</a>
+        <a href="#" onclick="openModal('tutorialModal')">Tutorial</a>
+        <a href="/profile">Profile</a>
+        <a href="/dataset">Dataset</a>
+        <!-- Link ke halaman Dataset -->
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>Welcome to the Breast Cancer Classification</h1>
+      <p>
+        This application helps you classify breast cancer cases as benign or
+        malignant based on input features.
+      </p>
+      <p>
+        Before classifying, let's understand the types and characteristics of
+        benign and malignant tumors.
+      </p>
+
+      <!-- Tumor Information Section -->
+      <div class="info-section">
+        <!-- Benign Tumor Information -->
+        <div class="info-box">
+          <img src="/static/Benign.jpg" alt="Benign Tumor" />
+          <h3>Benign Tumor</h3>
+          <p>
+            <strong>Definition:</strong> A benign tumor is a non-cancerous
+            growth that does not spread to other tissues or organs.
+          </p>
+          <p><strong>Characteristics:</strong></p>
+          <ul>
+            <li>Grows slowly</li>
+            <li>Has clear boundaries</li>
+            <li>Generally not life-threatening</li>
+          </ul>
+        </div>
+
+        <!-- Malignant Tumor Information -->
+        <div class="info-box">
+          <img src="/static/Malignant.jpg" alt="Malignant Tumor" />
+          <h3>Malignant Tumor</h3>
+          <p>
+            <strong>Definition:</strong> A malignant tumor is a cancerous growth
+            that can invade and destroy surrounding tissue and spread to other
+            parts of the body.
+          </p>
+          <p><strong>Characteristics:</strong></p>
+          <ul>
+            <li>Grows quickly and aggressively</li>
+            <li>Has unclear boundaries</li>
+            <li>Can be life-threatening</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Classify Button -->
+      <a href="{{ url_for('classify') }}" class="classify-button">Classify</a>
+
+      <!-- Additional Information Section -->
+      <div class="additional-info">
+        <h2>Did You Know?</h2>
+        <p>
+          Breast cancer is one of the most common types of cancer, affecting
+          millions of people worldwide. Early detection and accurate
+          classification of tumors can greatly improve treatment outcomes.
+        </p>
+        <p>
+          This application utilizes machine learning techniques to help classify
+          tumors based on specific input features, allowing for a more informed
+          diagnostic approach.
+        </p>
+      </div>
+    </div>
+
+    <!-- Modals for About, Contact, and Tutorial -->
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('aboutModal')">&times;</span>
+        <h2>About</h2>
+        <p>
+          This is an application to assist with breast cancer classification.
+          This application was developed using the Naive Bayes algorithm with
+          hyperparameter optimization through RandomizedSearchCV, achieving a
+          classification accuracy of up to 94.74%.
+        </p>
+      </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('contactModal')">&times;</span>
+        <h2>Contact</h2>
+        <p>Contact us via email at aldifahrezi172002@gmail.com</p>
+      </div>
+    </div>
+
+    <div id="tutorialModal" class="modal">
+      <div
+        class="modal-content"
+        style="
+          font-family: Arial, sans-serif;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        "
+      >
+        <!-- Close Button -->
+        <span
+          class="close"
+          onclick="closeModal('tutorialModal')"
+          style="
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+          "
+          >&times;</span
+        >
+        <h2 style="text-align: center; color: #000000">Tutorial</h2>
+        <p style="text-align: center; font-size: 16px; color: #555">
+          Enter values for the following features to perform classification:
+        </p>
+        <ul style="list-style-type: none; padding: 0; line-height: 1.8">
+          <li><b>Radius Mean:</b> Enter a value between <b>6.0 - 30.0</b></li>
+          <li><b>Texture Mean:</b> Enter a value between <b>10.0 - 40.0</b></li>
+          <li>
+            <b>Perimeter Mean:</b> Enter a value between <b>40.0 - 190.0</b>
+          </li>
+          <li><b>Area Mean:</b> Enter a value between <b>150.0 - 2500.0</b></li>
+          <li>
+            <b>Smoothness Mean:</b> Enter a value between <b>0.05 - 0.15</b>
+          </li>
+          <li>
+            <b>Compactness Mean:</b> Enter a value between <b>0.02 - 0.35</b>
+          </li>
+          <li>
+            <b>Concavity Mean:</b> Enter a value between <b>0.01 - 0.40</b>
+          </li>
+          <li>
+            <b>Concave Points Mean:</b> Enter a value between <b>0.01 - 0.20</b>
+          </li>
+          <li>
+            <b>Symmetry Mean:</b> Enter a value between <b>0.10 - 0.30</b>
+          </li>
+          <li>
+            <b>Fractal Dimension Mean:</b> Enter a value between
+            <b>0.05 - 0.10</b>
+          </li>
+        </ul>
+        <p style="text-align: center; font-size: 16px; color: #555">
+          Once all values are entered, click the <b>Classify</b> button to see
+          the diagnosis result.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Function to open modal
+      function openModal(modalId) {
+        document.getElementById(modalId).style.display = "flex";
+      }
+
+      // Function to close modal
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+      }
+
+      // Close modal if user clicks outside the content
+      window.onclick = function (event) {
+        const modals = document.getElementsByClassName("modal");
+        for (let modal of modals) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

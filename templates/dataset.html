@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dataset - Breast Cancer Classification</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f7f7f7;
+      }
+      h1 {
+        color: #fa05c5;
+        text-align: center;
+      }
+      .table-container {
+        margin: 20px auto;
+        max-width: 98%; /* Lebar diperbesar menjadi 98% */
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow-x: auto; /* Menambahkan scroll horizontal jika tabel terlalu lebar */
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      table th,
+      table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      table th {
+        background-color: #fa05c5;
+        color: white;
+      }
+      a {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #fa05c5;
+        font-weight: bold;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dataset: Wisconsin Breast Cancer</h1>
+    <div class="table-container">{{ dataset_table | safe }}</div>
+    <a href="/">Kembali ke Home</a>
+  </body>
+</html>
